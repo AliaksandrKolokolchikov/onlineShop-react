@@ -1,6 +1,15 @@
+import Poster from "../Poster/Poster";
+import Products from "../Products/Products";
+import {useSelector} from "react-redux";
+
 function Home() {
+    const { list } = useSelector(({products}) => products);
+
     return(
-        <div>Home</div>
+        <>
+        <Poster/>
+        <Products products={list} amount={5} title="Trending"/>
+        </>
     )
 }
 export default Home;

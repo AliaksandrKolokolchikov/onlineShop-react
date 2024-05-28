@@ -1,10 +1,14 @@
-import Poster from "../Poster/Poster";
-import Products from "../Products/Products";
+import {useEffect} from "react";
+
 import {useDispatch, useSelector} from "react-redux";
+import {filterByPrice} from "../../features/products/ProductsSlice";
+
+
+import Products from "../Products/Products";
+import Poster from "../Poster/Poster";
 import Categories from "../Categories/Categories";
 import Banner from "../Banner/Banner";
-import {useEffect} from "react";
-import {filterByPrice} from "../../features/products/ProductsSlice";
+
 
 function Home() {
     const dispatch = useDispatch();

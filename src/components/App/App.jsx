@@ -7,6 +7,7 @@ import {useEffect} from "react";
 
 import {getCategories} from "../../features/categories/categoriesSlice";
 import {getProducts} from "../../features/products/ProductsSlice";
+import UserForm from "../User/UserForm";
 
 function App() {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function App() {
     return (
         <div className={'app'}>
             <Header/>
-
+            <UserForm/>
             <div className={'container'}>
                 <Sidebar/>
                 <AppRoutes/>

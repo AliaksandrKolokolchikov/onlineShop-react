@@ -1,12 +1,28 @@
 import headerStyle from './../../styles/Header.module.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {ROUTES} from "../../utils/Routes";
 
 import headerLogo from "../../images/logo.svg";
 import headerAvatar from '../../images/avatar.jpg'
+import {useDispatch, useSelector} from "react-redux";
+import {toggleForm} from "../../features/user/userSlice";
+import {useEffect, useState} from "react";
 
 
 function Header() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { currentUser } = useSelector(({user}) => user);
+    const [values, setValues] = useState({name:'Guest', avatar:headerAvatar})
+
+    useEffect(() => {
+        if(!currentUser) return;
+        setValues(currentUser)
+    }, [currentUser]);
+    const handleClick = () => {
+        if(!currentUser) dispatch(toggleForm(true))
+        else navigate(ROUTES.PROFILE)
+    }
     return (
         <div className={headerStyle.header}>
             <div className={headerStyle.logo}>
@@ -15,10 +31,10 @@ function Header() {
                 </Link>
             </div>
             <div className={headerStyle.info}>
-                <div className={headerStyle.user}>
+                <div className={headerStyle.user} onClick={handleClick}>
                     <div className={headerStyle.avatar}
-                         style={{ backgroundImage:`url(${headerAvatar})` }} />
-                    <div className={headerStyle.username}>Guest</div>
+                         style={{ backgroundImage:`url(${values.avatar})` }} />
+                    <div className={headerStyle.username}>{values.name}</div>
                 </div>
                 <form className={headerStyle.form}>
                     <div className={headerStyle.icon}>
